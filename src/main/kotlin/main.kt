@@ -10,6 +10,12 @@ fun calculateCost(inputs : List<String>) : Double {
     var applesCount = inputs.count { it.equals("Apple") }
     var orangesCount = inputs.count { it.equals("Orange") }
 
-    val cost = .6*applesCount + .25*orangesCount
+    var effApplesCount = effectiveApplesCount(applesCount)
+    var effOrangeCount = effectiveOrangesCount(applesCount)
+
+    val cost = .6*effApplesCount + .25*effOrangeCount
     return cost
 }
+
+fun effectiveApplesCount(applesCount : Int) : Int = applesCount/2 + applesCount%2
+fun effectiveOrangesCount(orangesCount : Int) : Int = orangesCount/3*2 + orangesCount%3
