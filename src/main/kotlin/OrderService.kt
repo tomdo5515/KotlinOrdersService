@@ -3,13 +3,15 @@ class OrderService {
     // This is the implementation of Observable pattern
     var observers: ArrayList<Observer> = ArrayList()
     var totalCost : Double = 0.0
+    var limitedStock : Boolean = false
 
-    fun getTotalCostOfOrder() : Double {
-        return totalCost
+    fun getTotalCostAndLimitedStock() : Pair<Double, Boolean> {
+        return Pair(totalCost, limitedStock)
     }
 
-    fun setTotalCostAndNotify(newTotalCost : Double) {
+    fun setTotalCostAndLimitedStock(newTotalCost : Double, isLimitedStock : Boolean) {
         this.totalCost = newTotalCost
+        this.limitedStock = isLimitedStock
         notifyAllObservers();
     }
 
@@ -22,15 +24,19 @@ class OrderService {
     }
 
     // OrderService business logic
+    val remainingApples = 5
+    val remainingOranges = 5
     fun calculateCost(inputs : List<String>) : Double {
         var applesCount = inputs.count { it.equals("Apple") }
         var orangesCount = inputs.count { it.equals("Orange") }
+        var isLimitedStock = applesCount > remainingApples || orangesCount > remainingOranges
 
         var effApplesCount = effectiveApplesCount(applesCount)
         var effOrangeCount = effectiveOrangesCount(orangesCount)
 
+
         val cost = .6*effApplesCount + .25*effOrangeCount
-        this.setTotalCostAndNotify(cost)
+        this.setTotalCostAndLimitedStock(cost, isLimitedStock)
         return cost
     }
 
