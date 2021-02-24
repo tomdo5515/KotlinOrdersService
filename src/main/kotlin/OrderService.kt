@@ -26,7 +26,7 @@ class OrderService {
     // OrderService business logic
     val remainingApples = 5
     val remainingOranges = 5
-    fun calculateCost(inputs : List<String>) : Double {
+    fun calculateCost(inputs : List<String>) : Triple<Int, Int, Double> {
         var applesCount = inputs.count { it.equals("Apple") }
         var orangesCount = inputs.count { it.equals("Orange") }
         var isLimitedStock = applesCount > remainingApples || orangesCount > remainingOranges
@@ -37,7 +37,7 @@ class OrderService {
 
         val cost = .6*effApplesCount + .25*effOrangeCount
         this.setTotalCostAndLimitedStock(cost, isLimitedStock)
-        return cost
+        return Triple(applesCount, orangesCount, cost)
     }
 
     fun effectiveApplesCount(applesCount : Int) : Int = applesCount/2 + applesCount%2

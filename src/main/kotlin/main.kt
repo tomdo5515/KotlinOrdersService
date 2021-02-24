@@ -8,7 +8,9 @@ fun main(args: Array<String>) {
     NotificationService(orderService)
 
     // Use the Order Service to calculate the total cost
-    val cost = orderService.calculateCost(inputs)
+    val (apples, oranges, cost) = orderService.calculateCost(inputs)
 
+    // Send OrderSubmitted to kafka topic
+    SimpleProducer("localhost:9092").produce(OrderSubmitted(apples, oranges, cost))
 }
 

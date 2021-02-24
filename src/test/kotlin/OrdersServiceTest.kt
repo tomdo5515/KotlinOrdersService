@@ -5,7 +5,7 @@ class OrdersServiceTest {
     @Test fun testCalculateCost() {
         val orderService = OrderService()
         val inputs = listOf("Apple", "Apple", "Orange", "Orange","Orange")
-        assertEquals(1.1, orderService.calculateCost(inputs), "2 Apples and 3 Orange cost $1.1")
+        assertEquals(Triple(2,3,1.1), orderService.calculateCost(inputs), "2 Apples and 3 Orange cost $1.1")
     }
 
     @Test fun testEffectiveApplesCount() {

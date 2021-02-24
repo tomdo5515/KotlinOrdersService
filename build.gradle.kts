@@ -14,6 +14,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test-junit"))
+    compile("org.apache.kafka:kafka-clients:2.0.0")
+    compile("ch.qos.logback:logback-classic:1.2.3")
 }
 
 tasks.test {

@@ -13,7 +13,7 @@ class NotificationService(val otherOrderService : OrderService) : Observer {
         if (isLimitedStock) {
             println("Notification Service: Order failed. Out of stock!!!")
         } else {
-            println("Notification Service: The Total Cost of your Order is: "+orderCost)
+            println("Notification Service: The Total Cost of your Order is: $"+orderCost)
         }
     }
 }
